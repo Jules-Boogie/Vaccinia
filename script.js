@@ -166,7 +166,7 @@ if (navigator.geolocation) {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
-    var legend = L.control({ position: "bottomleft" });
+    var legend = L.control({ position: "topright" });
 
     legend.onAdd = function(map) {
         var div = L.DomUtil.create("div", "legend");
@@ -183,7 +183,6 @@ if (navigator.geolocation) {
 
     stateList.addEventListener('change',(e)=>{
       const stateArray = e.target.value
-      console.log(stateArray.split(',')[0])
       setMarkers(map,stateArray.split(',')[0].trim())
       geolocation.forEach((location)=> {
         if(location["state"].toLowerCase() == stateArray.split(',')[1].trim().toLowerCase()){
