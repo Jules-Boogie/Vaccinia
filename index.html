@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/png" href="/icon.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+      data-auto-a11y="true"
+    ></script>
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="api.js"></script>
+    <script defer src="states.js"></script>
+    <script defer src="script.js"></script>
+    <title>Vaccine Locator</title>
+  </head>
+  <body>
+    <header>
+      <div class="invisible absolute z-30 alert logo space-x-2 bg-red-500 p-4 rounded flex items-center text-white shadow-lg mx-auto max-w-2xl w-full">
+        <i class="fas fa-heartbeat"></i>
+          <div class="
+          text-2xl
+          mb-2
+          font-medium
+          logo
+          rounded-md
+          content-start
+          md:mb-0
+          bg-red-500
+          border border-red-500
+          px-5
+          py-2
+          text-sm
+          shadow-sm
+          font-medium
+          tracking-wider
+          text-white
+          hover:shadow-lg
+          hover:bg-red-600
+          ">
+           This location has been saved. Click the bookmark tab to see saved locations. 
+          </div>
+          <i class="fas fa-check-circle"></i>
+      </div>
+      <div class="flex justify-between">
+        <img src="logo.png" alt="Logo" class="logo" />
+        <form class="relative inline-flex">
+          <select
+            id="state"
+            class="
+              text-2xl
+              font-medium
+              rounded-md
+              hover:shadow-lg
+              logo
+              border
+              px-5
+              py-2
+              text-gray-600
+              h-10
+              bg-white
+              focus:outline-none
+              appearance-none
+              cursor-pointer
+            "
+          >
+            <option>Choose a state</option>
+          </select>
+        </form>
+        <button
+        id="bookmark"
+          class="
+            text-2xl
+            mb-2
+            font-medium
+            logo
+            rounded-md
+            content-start
+            md:mb-0
+            bg-red-500
+            border border-red-500
+            px-5
+            py-2
+            text-sm
+            shadow-sm
+            font-medium
+            tracking-wider
+            text-white
+            hover:shadow-lg
+            hover:bg-red-600
+          "
+        >
+          <i class="fas fa-bookmark"></i>
+          Saved Locations
+        </button>
+      </div>
+    </header>
+    <div
+    id="saved-div"
+            class="invisible
+            z-30
+            w-full
+            max-w-lg
+            p-5
+            absolute
+            rounded-xl
+            shadow-lg
+            bg-white
+            text-red-500
+          "
+          >
+          <h3 class="text-3xl font-bold p-4">
+            Saved Locations
+          </h3>
+            <ul id="saved-list" class="flex flex-col p-4">
+            </ul>
+          </div>
+    <div class="body">
+      <div class="sidebar">
+        <!-- <div class="my__div--icon"> </div> -->
+        <!-- <div class=" workouts min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none"  style="background: rgba(0,0,0,.2);" id="modal-id"> -->
+        <div
+        id="location__info"
+          class="
+          invisible
+            w-full
+            max-w-lg
+            p-5
+            relative
+            mx-auto
+            my-auto
+            rounded-xl
+            shadow-lg
+            bg-white
+            text-red-500
+          "
+        >
+          <!--content-->
+          <div class="">
+            <!--body-->
+            <div class="text-center p-5 flex-auto justify-center">
+              <h2
+                id="location__name"
+                class="text-3xl font-bold py-4"
+              ></h2>
+              <p
+                id="location__address"
+                class="flex flex-col text-xl font-medium text-gray-500"
+              ></p>
+              <div class="bg-gray-100 rounded-lg">
+                <div class="py-4 px-4">
+                  <div class="flex flex-col">
+                    <h3 class="text-lg  font-bold  mb-3">
+                      Vaccines Administered Here
+                    </h3>
+                    <div
+                      id="location__vaccines"
+                      class="flex flex-col text-xl font-medium text-gray-500"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-gray-100 rounded-lg">
+                <div class="py-4 px-4">
+                  <div class="flex flex-col">
+                    <h4 class="text-lg font-bold mb-3">Features</h4>
+                    <div
+                      id="vaccine__list"
+                      class="flex flex-col text-xl font-medium text-gray-500"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--footer-->
+            <div class="p-3 mt-2 text-center space-x-4 md:block">
+              <button
+              id="close_button"
+                class="
+                  text-xl
+                  font-medium
+                  rounded-md
+                  mb-2
+                  md:mb-0
+                  bg-white
+                  px-5
+                  py-2
+                  text-sm
+                  shadow-sm
+                  font-medium
+                  tracking-wider
+                  border
+                  text-gray-600
+                  hover:shadow-lg
+                  hover:bg-gray-100
+                "
+              >
+                Close
+              </button>
+              <button
+              id="save-button"
+                class="
+                  text-xl
+                  font-medium
+                  rounded-md
+                  mb-2
+                  md:mb-0
+                  bg-red-500
+                  border border-red-500
+                  px-5
+                  py-2
+                  text-sm
+                  shadow-sm
+                  font-medium
+                  tracking-wider
+                  text-white
+                  hover:shadow-lg
+                  hover:bg-red-600
+                "
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- </div> -->
+
+        <p class="copyright">
+          &copy; Copyright by
+          <a
+            class="twitter-link"
+            target="_blank"
+            href="https://www.linkedin.com/in/juliet-g-864950b8/"
+            >Juliet George</a
+          >
+        </p>
+      </div>
+
+      <div id="map"></div>
+    </div>
+  </body>
+</html>
