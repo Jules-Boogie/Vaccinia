@@ -37,4 +37,4 @@ This web application can be used to find vaccine centers in all of US. Users can
 Juliet George
 
 **Contact:**
-[LinkedIn](https://www.linkedin.com/in/juliet-george-864950b8/)
+[LinkedIn](https://www.linkedin.com/in/juliet-g-864950b8/)
