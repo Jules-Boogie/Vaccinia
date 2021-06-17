@@ -169,13 +169,8 @@ if (navigator.geolocation) {
         "<div style='display:inline-block' class='my__div--icon-jj'> </div><span> Johnson & Johnson(18+)</span><br>";
       return div;
     };
-
-    
     legend.addTo(map);
-    getState(coords.join()).then(res => 
-      setMarkers(map,res))
-    ;
-
+    getState(coords.join()).then(res => setMarkers(map,res));
     stateList.addEventListener('change', e => {
       const stateArray = e.target.value;
       setMarkers(map, stateArray.split(',')[0].trim());
