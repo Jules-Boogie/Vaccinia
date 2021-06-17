@@ -4,6 +4,8 @@
 I needed to get the COVID vaccine but did not find right vaccine administrator.
 This web application can be used to find vaccine centers in all of US. Users can choose a state, view the location to see the types of vaccine administered and save the right location for later. 
 
+## Deployed Link
+https://jules-boogie.github.io/Vaccinia/
 
 ## App Photos
 ![App Photo1](https://github.com/Jules-Boogie/Vaccinia/blob/main/media/VaccineLocator.PNG)
