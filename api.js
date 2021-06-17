@@ -11,7 +11,7 @@ const getData = async (state)=> {
 
 const getState = async(coords)=>{
     try{
-        const result = await axios.get(`http://www.mapquestapi.com/geocoding/v1/reverse?key=${config.mapQuestKey}&location=${coords}`);
+        const result = await axios.get(`https://www.mapquestapi.com/geocoding/v1/reverse?key=${config.mapQuestKey}&location=${coords}`);
         const data = await result.data.results[0].locations[0].adminArea3;
         return data;
     }catch(err){
